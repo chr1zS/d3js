@@ -44,32 +44,29 @@ var svg = d3.select("#mapaMadrid")
   .attr("height", height);
 
 // Cargar los datos geoespaciales de los distritos de Madrid
+console.log("Cargando datos geoespaciales...");
 d3.json("madrid_districts.geojson").then(function (geojson) {
+  
   // Dibujar los distritos
   svg.selectAll(".distrito")
     .data(geojson.features)
     .enter().append("path")
     .attr("class", "distrito")
     .attr("d", path)
-      // Agregar evento para mostrar el nombre del distrito al pasar el ratón
-    .on("mouseover", function (d) {
-      // Obtener el nombre del distrito
-      var distritoNombre = d.properties.NAME;
 
-      // Mostrar el nombre del distrito en un tooltip
-      tooltip.transition()
-        .duration(200)
-        .style("opacity", .9);
-      tooltip.html(distritoNombre)
-        .style("left", (d3.event.pageX) + "px")
-        .style("top", (d3.event.pageY - 28) + "px");
-    })
-    .on("mouseout", function (d) {
-      // Ocultar el tooltip al quitar el ratón del distrito
-      tooltip.transition()
-        .duration(500)
-        .style("opacity", 0);
-    });
+  // Mostrar nombres de distritos como etiquetas de texto
+  svg.selectAll(".distrito-label")
+    .data(geojson.features)
+    .enter().append("text")
+    .attr("class", "distrito-label")
+    .attr("x", function(d) { return path.centroid(d)[0] - 13; }) // Ajustar la posición x
+    .attr("y", function(d) { return path.centroid(d)[1]; }) // Mantener la posición y en el centro vertical
+    .attr("dy", ".35em")
+    .style("font-size", "8px") 
+    .text(function (d) { return d.properties.name; })
+  
+}).catch(function (error) {
+  console.error("Error al cargar los datos geoespaciales:", error);
 });
 
 // Crear un tooltip para mostrar el nombre del distrito
@@ -79,8 +76,3 @@ var tooltip = d3.select("body").append("div")
 
 // Escuchar el evento de redimensionamiento de la ventana
 window.addEventListener("resize", resize);
-
-
-
-
-
