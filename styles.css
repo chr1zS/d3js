@@ -1,0 +1,6 @@
+/* Estilos CSS para el mapa */
+.distrito {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: 1px;
+}
