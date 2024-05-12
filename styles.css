@@ -1,6 +1,59 @@
-/* Estilos CSS para el mapa */
 .distrito {
   fill: #ccc;
   stroke: #fff;
   stroke-width: 1px;
+}
+
+#mapaMadrid {
+  width: 569px;
+  height: 550px; 
+  display: flex;
+  
+}
+
+
+.nombreDistrito {
+  font-size: 25px;
+}
+
+.tooltip {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  height: auto;
+  padding: 5px;
+  font: 12px sans-serif;
+  background: lightgray;
+  border: 1px solid #333;
+  border-radius: 5px;
+  pointer-events: none; /* Evita que el tooltip interfiera con los eventos del ratón en los elementos subyacentes */
+}
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#table-container {
+  margin: 20px;
+}
+
+h1, h2 {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: left;
 }
